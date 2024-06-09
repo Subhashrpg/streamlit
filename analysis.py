@@ -156,8 +156,8 @@ def bowler_analysis(bowler):
 
         best_match = f"{bbi_run}/{bbi_wicket}"
 
-        wicket_df = inning_wicket.groupby("ID")["isWicketDelivery"].sum().reset_index()
-        three_wicket = wicket_df[wicket_df["isWicketDelivery"] <= 4]["isWicketDelivery"].count()
+        wicket_df = inning_wicket_df.groupby(["bowler","ID"])["isWicketDelivery"].sum().reset_index()
+        three_wicket = wicket_df[(wicket_df["isWicketDelivery"] <= 4) & (wicket_df["isWicketDelivery"] >= 3)]["isWicketDelivery"].count()
         five_wicket = wicket_df[wicket_df["isWicketDelivery"] >= 5]["isWicketDelivery"].count()
 
 
