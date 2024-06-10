@@ -194,7 +194,7 @@ def bowler_overall(bowler):
     bbi_df["BBM"] = bbi_df.total_run.astype("str") +"/" + bbi_df.isWicketDelivery.astype("str")
     bbi_df = bbi_df.drop(columns = ["total_run","isWicketDelivery"])
 
-    three_wicket = best_inning[best_inning.isWicketDelivery <= 4].groupby("BattingTeam").isWicketDelivery.count().reset_index()
+    three_wicket = best_inning[(best_inning.isWicketDelivery <= 4) & (best_inning.isWicketDelivery >= 3)].groupby("BattingTeam").isWicketDelivery.count().reset_index()
     five_wicket = best_inning[best_inning.isWicketDelivery >= 5].groupby("BattingTeam").isWicketDelivery.count().reset_index()
     three_five_df = three_wicket.merge(five_wicket, on = "BattingTeam", how = "outer")
 
